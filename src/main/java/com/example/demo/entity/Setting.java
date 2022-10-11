@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -9,7 +10,10 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.example.demo.enums.Status;
@@ -46,4 +50,33 @@ public class Setting {
 
     @ManyToMany(mappedBy = "settings")
     private Set<User> users;
+
+    @OneToMany(mappedBy = "category")
+    private List<WebContact> webContacts;
+
+    @ManyToOne
+    @JoinColumn(name = "screen_id")
+    private Setting screen;
+
+    @OneToMany(mappedBy = "screen")
+    private List<Setting> apis;
+
+    @ManyToOne
+    @JoinColumn(name = "type_id")
+    private Setting type;
+
+    @OneToMany(mappedBy = "type")
+    private List<Setting> settings;
+
+    @OneToMany(mappedBy = "settingTerm")
+    private List<Classes> classesTerm;
+
+    @OneToMany(mappedBy = "settingBranch")
+    private List<Classes> classesBranch;
+
+    @OneToMany(mappedBy = "screen")
+    private List<Permission> roles;
+
+    @OneToMany(mappedBy = "role")
+    private List<Permission> screens;
 }

@@ -7,6 +7,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.example.demo.enums.ContactStatus;
@@ -43,5 +45,13 @@ public class WebContact {
 
     @Enumerated(EnumType.STRING)
     private ContactStatus status;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Setting category;
+
+    @ManyToOne
+    @JoinColumn(name = "staff_id")
+    private User staff;
 
 }

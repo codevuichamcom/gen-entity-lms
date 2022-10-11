@@ -6,9 +6,12 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.Table;
 
-import com.example.demo.compositeKey.ClassUserKey;
+import com.example.demo.compositekey.ClassUserKey;
 import com.example.demo.enums.Status;
 
 import lombok.AllArgsConstructor;
@@ -41,5 +44,15 @@ public class ClassUser {
     private String finalEval;
 
     private String topicEval;
+
+    @ManyToOne
+    @MapsId("userId")
+    @JoinColumn(name = "user_Id")
+    private User user;
+
+    @ManyToOne
+    @MapsId("classId")
+    @JoinColumn(name = "class_Id")
+    private Classes classes;
 
 }

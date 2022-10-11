@@ -1,5 +1,7 @@
 package com.example.demo.entity;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -7,6 +9,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.example.demo.enums.Status;
@@ -39,5 +44,16 @@ public class Subject {
     private Status subjectStatus;
 
     private String body;
+
+    @ManyToMany(mappedBy = "subjects")
+    private Set<Classes> classes;
+
+    @ManyToOne
+    @JoinColumn(name = "manager_id")
+    private User manager;
+
+    @ManyToOne
+    @JoinColumn(name = "expert_id")
+    private User expert;
 
 }

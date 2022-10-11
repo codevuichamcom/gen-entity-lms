@@ -3,9 +3,12 @@ package com.example.demo.entity;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.Table;
 
-import com.example.demo.compositeKey.PermissionKey;
+import com.example.demo.compositekey.PermissionKey;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -33,5 +36,15 @@ public class Permission {
     private boolean canAdd;
 
     private boolean canEdit;
+
+    @ManyToOne()
+    @MapsId("screenId")
+    @JoinColumn(name = "screen_id")
+    private Setting screen;
+
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    @MapsId("roleId")
+    private Setting role;
 
 }

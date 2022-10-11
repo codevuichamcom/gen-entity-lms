@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -12,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.example.demo.enums.UserStatus;
@@ -57,7 +59,25 @@ public class User extends BaseEntity {
     private String note;
 
     @ManyToMany
-    @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_Id"), inverseJoinColumns = @JoinColumn(name = "role_Id"))
+    @JoinTable(name = "user_roles_tbl", joinColumns = @JoinColumn(name = "user_Id"), inverseJoinColumns = @JoinColumn(name = "role_Id"))
     private Set<Setting> settings;
+
+    @OneToMany(mappedBy = "staff")
+    private List<WebContact> webContacts;
+
+    @OneToMany(mappedBy = "manager")
+    private List<Subject> managedSubject;
+
+    @OneToMany(mappedBy = "expert")
+    private List<Subject> expertSubject;
+
+    @OneToMany(mappedBy = "userTrainer")
+    private List<Classes> classes;
+
+    @OneToMany(mappedBy = "userSupporter")
+    private List<Classes> classList;
+
+    @OneToMany(mappedBy = "user")
+    private List<ClassUser> classUsers;
 
 }

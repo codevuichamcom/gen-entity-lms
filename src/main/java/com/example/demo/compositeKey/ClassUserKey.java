@@ -1,4 +1,4 @@
-package com.example.demo.compositeKey;
+package com.example.demo.compositekey;
 
 import java.io.Serializable;
 
